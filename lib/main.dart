@@ -9,6 +9,9 @@ import 'package:magdsoft_flutter_structure/business_logic/global_cubit/global_cu
 import 'package:magdsoft_flutter_structure/data/local/cache_helper.dart';
 import 'package:magdsoft_flutter_structure/data/remote/dio_helper.dart';
 import 'package:magdsoft_flutter_structure/presentation/router/app_router.dart';
+import 'package:magdsoft_flutter_structure/presentation/screens/login_screen/login_screen.dart';
+import 'package:magdsoft_flutter_structure/presentation/screens/register_screen/register_screen.dart';
+import 'package:magdsoft_flutter_structure/presentation/screens/user/user_profile.dart';
 import 'package:magdsoft_flutter_structure/presentation/widget/toast.dart';
 import 'package:sizer/sizer.dart';
 import 'package:intl/intl.dart';
@@ -23,7 +26,7 @@ Future<void> main() async {
       DioHelper.init();
       await CacheHelper.init();
       final locale =
-          CacheHelper.getDataFromSharedPreference(key: 'language') ?? "ar";
+          CacheHelper.getDataFromSharedPreference(key: 'language') ?? "en";
       delegate = await LocalizationDelegate.create(
         fallbackLocale: locale,
         supportedLocales: ['ar', 'en'],
@@ -61,7 +64,7 @@ class _MyAppState extends State<MyApp> {
           Intl.defaultLocale = value.languageCode;
         });
       } catch (e) {
-        showToast(e.toString());
+        showToast(e.toString(),Colors.red);
       }
     };
   }
@@ -106,6 +109,7 @@ class _MyAppState extends State<MyApp> {
                         ),
                       ),
                     ),
+                    home: LoginScreen(),
                   );
                 }),
               );
